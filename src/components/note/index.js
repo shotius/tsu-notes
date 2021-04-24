@@ -8,6 +8,10 @@ export function Note({ note, handleRemove, handleEdit }) {
     history.push(`./note/${id}`)
   }
 
+  const editNote = (id) => {
+    history.push(`note/${id}/edit`);
+  }
+
   return (
     <li className='list-group-item d-flex justify-content-between'>
       <div onClick={() => getNote(note.id)}>{note.title}</div>
@@ -15,7 +19,7 @@ export function Note({ note, handleRemove, handleEdit }) {
         <button 
           className='btn btn-sm btn-outline-primary'
           style={{marginRight: '10px'}}
-          onClick={handleEdit}
+          onClick={() => editNote(note.id)}
         >
           edit
         </button>

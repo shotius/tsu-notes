@@ -7,6 +7,7 @@ import {NotesPage} from './pages/NotesPage'
 import {NotePage} from './pages/NotePage'
 import './App.css'
 import axios from 'axios'
+import EditPage from "./pages/EditPage";
 
 export default function App() {
   const [notes, setNotes] = useState([])
@@ -34,7 +35,6 @@ export default function App() {
   }
 
   const editNote = (id) => {
-
     console.log('edit is clicked')
   }
 
@@ -52,6 +52,8 @@ export default function App() {
         <Header/>
         <div className='content'>
           <Switch>
+            <Route path="/note/:id/edit" render={({match: {params}}) => <EditPage notes={notes} setNotes={setNotes}/>
+            }/>
             <Route
               path='/note/:id'
               render={(props) => <NotePage id={props.match.params.id}/>}
@@ -63,6 +65,7 @@ export default function App() {
                 editNote={editNote}
                 addNote={addNote}
               />
+
             </Route>
             <Route path='/about'>
               <h1>About Page</h1>
