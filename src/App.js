@@ -38,9 +38,11 @@ export default function App() {
     console.log('edit is clicked')
   }
 
-  const addNote = (e) => {
-    e.preventDefault()
-    console.log('add is clicked')
+  const addNote = (note) => {
+    axios
+      .post('http://localhost:3001/notes', note)
+      .then(({data}) => setNotes(notes.concat(data)))
+      .catch(err => console.log(err))
   }
 
   return (
