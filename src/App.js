@@ -8,7 +8,7 @@ import {NotePage} from './pages/NotePage'
 import './App.css'
 import axios from 'axios'
 import EditPage from "./pages/EditPage";
-import { getNotes } from './redux/actions/notesAction'
+import { getNotes, deleteNote } from './redux/actions/notesAction'
 import { useSelector, useDispatch } from 'react-redux'
 import notesReducer from './redux/reducers/notesReducer'
 
@@ -22,20 +22,9 @@ export default function App() {
     dispatch(getNotes())
   }, [])
 
-  const deleteNote = (id) => {
-    axios.delete(`http://localhost:3001/notes/${id}`)
-      .then(response => {
-        if (response.status < 200 || response.status > 299) {
-          throw new Error('Error deleting note')
-        } else {
-          const newNotes = notes.filter(note => note.id !== id);
-          setNotes(newNotes);
-        }
-      })
-      .catch(error => {
-        console.log(error)
-      })
-
+  // after deleletion fetch notes again
+  const handleDeleteNote = (id) => {
+    dispatch(deleteNote(id))
   }
 
   const editNote = (id) => {
@@ -65,7 +54,7 @@ export default function App() {
             <Route path='/notes'>
               <NotesPage
                 notes={notesRed}
-                removeNote={deleteNote}
+                removeNote={handleDeleteNote}
                 editNote={editNote}
                 addNote={addNote}
               />

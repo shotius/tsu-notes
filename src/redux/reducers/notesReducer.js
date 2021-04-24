@@ -25,6 +25,24 @@ export default function notesReducer(state = initState, action) {
                 getNotesError: action.error,
                 getNotesLoading: false
             }
+        case 'START_DELETE_NOTE':
+            return {
+                ...state,
+                deleteNoteLoading: true,
+                deleteNoteError: null
+            }
+        case 'DELETE_NOTES_SUCCESS':
+            return {
+                ...state,
+                deleteNoteError: null,
+                deleteNoteLoading: false,
+            }
+        case 'DELETE_NOTE_FAIL': 
+            return {
+                ...state,
+                deleteNoteLoading: false,
+                deleteNoteError: action.error
+            }
         default: 
             return state
     }
