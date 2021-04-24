@@ -1,13 +1,17 @@
 import React from 'react'
 import { Notes } from '../components/notes'
+import {AddNoteForm} from '../components/form'
 
 export function NotesPage(props) {
   return (
-    <Notes
-      notes={props.notes}
-      removeNote={props.removeNote}
-      getNote={props.getNote}
-      editNote={props.editNote}
-    />
+    <>
+      <AddNoteForm handleAddition={props.addNote}/>
+      <Notes
+        notes={props.notes}
+        removeNote={props.removeNote}
+        getNote={props.getNote}
+        editNote={props.editNote}
+      />
+    </>
   )
 }

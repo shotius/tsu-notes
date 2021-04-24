@@ -6,20 +6,19 @@ import {MainPage} from './pages/MainPage'
 import {NotesPage} from './pages/NotesPage'
 import {NotePage} from './pages/NotePage'
 import './App.css'
+import axios from 'axios'
 
 export default function App() {
   const [notes, setNotes] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3001/notes')
-      .then((response) => response.json())
-      .then((data) => setNotes(data))
+    axios
+      .get('http://localhost:3001/notes')
+      .then(({data}) => setNotes(data))
   }, [])
 
   const deleteNote = (id) => {
-    fetch(`http://localhost:3001/notes/${id}`, {
-      method: 'DELETE',
-    })
+    axios.delete(`http://localhost:3001/notes/${id}`)
       .then(response => {
         if (response.status < 200 || response.status > 299) {
           throw new Error('Error deleting note')
@@ -39,6 +38,11 @@ export default function App() {
     console.log('edit is clicked')
   }
 
+  const addNote = (e) => {
+    e.preventDefault()
+    console.log('add is clicked')
+  }
+
   return (
     <div className='App'>
       <Router>
@@ -55,6 +59,7 @@ export default function App() {
                 notes={notes}
                 removeNote={deleteNote}
                 editNote={editNote}
+                addNote={addNote}
               />
             </Route>
             <Route path='/about'>

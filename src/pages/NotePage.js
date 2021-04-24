@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 export function NotePage({ id }) {
   const [note, setNote] = useState(null)
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then((response) => response.json())
-      .then((data) => setNote(data))
+    axios
+      .get(`http://localhost:3001/todos/${id}`)
+      .then(({data}) => setNote(data))
   }, [])
 
   return (
