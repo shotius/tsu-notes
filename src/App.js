@@ -27,7 +27,8 @@ export default function App() {
     console.log('edit is clicked')
   }
 
-  const addNote = () => {
+  const addNote = (e) => {
+    e.preventDefault()
     console.log('add is clicked')
   }
 
