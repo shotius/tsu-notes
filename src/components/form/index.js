@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import "./style.css"
 
 export const AddNoteForm = ({handleAddition}) => {
+    const [title, setTitle] = useState('')
     const handleSubmit = (e) => {
         e.preventDefault()
         // const newNote = {
