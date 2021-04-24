@@ -8,33 +8,31 @@ export const AddNoteForm = ({handleAddition}) => {
     const handleSubmit = (e) => {
         e.preventDefault()
         const newNote = {
-            title, body
+            title,body
         }
-        handleAddition(newNote)
-        setTitle('')
-        setBody('')
+        console.log(newNote)
     }
     return (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
             <label><b>Create New Note</b></label>
             <input 
-                type="text" 
-                className="form-control" 
-                id="editTitle" 
-                placeholder="title"
+                type="text"     
+                className="form-control"    
+                id="editTitle"  
+                placeholder="title"     
                 value={title}
                 onChange={({target}) => setTitle(target.value)}
                 />
             <input 
-                type="text" 
-                className="form-control" 
-                id="editTitle" 
-                placeholder="body"
+                type="text"     
+                className="form-control"    
+                id="editTitle"  
+                placeholder="body"     
                 value={body}
-                onChange={({target}) => setBody(target.value)}
-                />
+                onChange={({target}) => setBody(target.value)}/>
             </div>
+            
             <button className='btn btn-primary' type="text">Add Note</button>
         </form>
 )
