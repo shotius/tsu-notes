@@ -1,9 +1,0 @@
-PUT http://localhost:3001/notes/2 HTTP/1.1
-content-type: application/json
-
-{
-  "id": 2,
-  "content": "changed",
-  "date": "2019-05-30T18:39:34.091Z",
-  "important": false
-}
