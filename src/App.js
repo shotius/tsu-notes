@@ -6,16 +6,10 @@ import { Sidebar } from './components/sidebar'
 import { MainPage } from './pages/MainPage'
 import { NotesPage } from './pages/NotesPage'
 import { NotePage } from './pages/NotePage'
-import { inc, dec } from './actions'
 import './App.css'
 
 export default function App() {
   const [notes, setNotes] = useState([])
-
-  const dispatch = useDispatch()
-  const state = useSelector((state) => state.counter)
-  
-  console.log('state', state)
 
   useEffect(() => {
     fetch('https://jsonplaceholder.typicode.com/posts')
@@ -28,21 +22,12 @@ export default function App() {
     setNotes(notes)
   }
 
-  const decrement = () => dispatch(dec())
-
-  const increment = () => dispatch(inc())
-
   return (
     <div className='App'>
       <Router>
         <Sidebar />
         <Header />
         <div className='content'>
-          <div className='container'>
-            <button onClick={decrement}>-</button>
-            <span>{state.counter}</span>
-            <button onClick={increment}>+</button>
-          </div>
           <Switch>
             <Route
               path='/note/:id'
