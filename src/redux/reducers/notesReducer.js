@@ -1,7 +1,7 @@
 const initState = {
     notes : [],
     getNotesError: null,
-    getNotesLoading: false
+    getNotesLoading: false,
 }
 
 export default function notesReducer(state = initState, action) {
@@ -42,6 +42,24 @@ export default function notesReducer(state = initState, action) {
                 ...state,
                 deleteNoteLoading: false,
                 deleteNoteError: action.error
+            }
+        case 'START_ADD_NEW_NOTE':
+            return {
+                ...state,
+                addNoteLoading: true,
+                addNoteError: null
+            }
+        case 'ADD_NOTE_SUCCESS':
+            return {
+                ...state,
+                addNoteLoading: false,
+                addNoteError: null,
+            }
+        case 'ADD_NOTE_FAIL':
+            return {
+                ...state,
+                addNoteLoading: false,
+                addNoteError: action.error
             }
         default: 
             return state
