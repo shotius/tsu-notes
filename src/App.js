@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { Header } from './components/navbar'
 import { Sidebar } from './components/sidebar'
 import { MainPage } from './pages/MainPage'
@@ -18,8 +17,13 @@ export default function App() {
   }, [])
 
   const deleteNote = (id) => {
-    const notes = notes.filter((item) => item.id !== id)
-    setNotes(notes)
+    // const notes = notes.filter((item) => item.id !== id)
+    // setNotes(notes)
+    console.log('clicked remove')
+  }
+
+  const editNote = (id) => {
+    console.log('edit is clicked')
   }
 
   return (
@@ -34,7 +38,11 @@ export default function App() {
               render={(props) => <NotePage id={props.match.params.id} />}
             />
             <Route path='/notes'>
-              <NotesPage notes={notes} removeNote={deleteNote} />
+              <NotesPage 
+                notes={notes} 
+                removeNote={deleteNote} 
+                editNote={editNote}
+              />
             </Route>
             <Route path='/about'>
               <h1>About Page</h1>
