@@ -11,7 +11,7 @@ export default function App() {
   const [notes, setNotes] = useState([])
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
+    fetch('http://localhost:3001/notes')
       .then((response) => response.json())
       .then((data) => setNotes(data))
   }, [])

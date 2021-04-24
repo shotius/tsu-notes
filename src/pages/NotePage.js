@@ -4,7 +4,7 @@ export function NotePage({ id }) {
   const [note, setNote] = useState(null)
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+    fetch(`http://localhost:3001/todos/${id}`)
       .then((response) => response.json())
       .then((data) => setNote(data))
   }, [])
