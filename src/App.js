@@ -8,14 +8,18 @@ import {NotePage} from './pages/NotePage'
 import './App.css'
 import axios from 'axios'
 import EditPage from "./pages/EditPage";
+import { getNotes } from './redux/actions/notesAction'
+import { useSelector, useDispatch } from 'react-redux'
+import notesReducer from './redux/reducers/notesReducer'
 
 export default function App() {
   const [notes, setNotes] = useState([])
 
+  const dispatch = useDispatch()
+  const notesRed = useSelector((state) => state.notesReducer.notes)
+
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/notes')
-      .then(({data}) => setNotes(data))
+    dispatch(getNotes())
   }, [])
 
   const deleteNote = (id) => {
@@ -60,7 +64,7 @@ export default function App() {
             />
             <Route path='/notes'>
               <NotesPage
-                notes={notes}
+                notes={notesRed}
                 removeNote={deleteNote}
                 editNote={editNote}
                 addNote={addNote}

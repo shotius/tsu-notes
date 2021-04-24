@@ -2,8 +2,8 @@ import axios from 'axios'
 const base_url = 'http://localhost:3001'
 
 export const getNotes = () => {
-    dispatch(getNotesStart())
     return (dispatch) => {
+        dispatch(getNotesStart())
         axios
             .get(`${base_url}/notes`)
             .then(({data}) => dispatch(getNotesSuccess(data)))
