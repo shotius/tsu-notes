@@ -4,20 +4,27 @@ import "./style.css"
 export const AddNoteForm = ({handleAddition}) => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
+    const [error, setError] = useState(null)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const newNote = {
-            title, body
+        // title or body fields are filled
+        if (title || body){
+            const newNote = { title, body }
+            handleAddition(newNote)
+            setTitle('')
+            setBody('')
+        } else {
+            setError('fill out the fields')
+            setTimeout(() => setError(null), 3000)
         }
-        handleAddition(newNote)
-        setTitle('')
-        setBody('')
     }
+
     return (
         <form onSubmit={handleSubmit}>
             <div className="form-group">
             <label><b>Create New Note</b></label>
+            <div style={{color: 'red'}}>{error}</div>
             <input 
                 type="text" 
                 className="form-control" 
