@@ -10,7 +10,6 @@ export function NotesPage(props) {
         notes={props.notes}
         removeNote={props.removeNote}
         getNote={props.getNote}
-        editNote={props.editNote}
       />
     </>
   )

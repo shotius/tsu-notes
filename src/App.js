@@ -38,7 +38,6 @@ export default function App() {
               <NotesPage
                 notes={notes}
                 removeNote={(id) => dispatch(deleteNote(id))}
-                editNote={editNote}
                 addNote={(note) => dispatch(addNote(note))}
               />
 
