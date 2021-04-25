@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
-export function Note({ note, handleRemove, handleEdit }) {
+export function Note({ note, handleRemove }) {
   const history = useHistory()
 
   const getNote = (id) => {

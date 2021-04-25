@@ -61,6 +61,24 @@ export default function notesReducer(state = initState, action) {
                 addNoteLoading: false,
                 addNoteError: action.error
             }
+        case 'EDIT_NOTE_START':
+            return {
+                ...state, 
+                editNoteLoading: true,
+                editNOteError: null
+            }
+        case 'EDIT_NOTE_SUCCESS':
+            return {
+                ...state,
+                editNoteLoading: false,
+                editNoteError: null
+            }
+        case 'EDIT_NOTE_FAIL':
+            return {
+                ...state,
+                editNoteLoading: false,
+                addNoteError: action.error
+            }
         default: 
             return state
     }

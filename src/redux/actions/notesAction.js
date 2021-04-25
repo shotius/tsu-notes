@@ -15,7 +15,7 @@ export const deleteNote = (id) => {
     return (dispatch) => {
         dispatch(deleteNoteStart())
         axios
-            .delete(`${base_url}/${id}`)
+            .delete(`${base_url}/notes/${id}`)
             .then(() => {
                 dispatch(deleteNoteSuccess())
                 dispatch(getNotes())
@@ -28,12 +28,26 @@ export const addNote = (note) => {
     return (dispatch) => {
         dispatch(addNoteStart())
         axios
-            .post(`${base_url}`, note)
+            .post(`${base_url}/notes`, note)
             .then(() => {
                 dispatch(addNoteSuccess())
                 dispatch(getNotes())
             })
             .catch(error => dispatch(addNoteFail(error)))
+    }
+}
+
+export const editNote = (note, callback) => {
+    return (dispatch) => {
+        dispatch(editNoteStart())
+        axios
+            .put(`${base_url}/notes/${note.id}`, note)
+            .then(() =>  {
+                dispatch(getNotes())
+                dispatch(editNoteSuccess())
+                callback()
+            })
+            .catch(error => dispatch(editNoteFail(error)))
     }
 }
 
@@ -82,3 +96,18 @@ const addNoteFail = (error) => ({
     type: 'ADD_NOTE_FAIL',
     error
 })
+
+/* edit Note */
+
+const editNoteStart = () => ({
+    type: 'EDIT_NOTE_START'
+})
+
+const editNoteSuccess = () => ({
+    type: 'EDIT_NOTE_SUCCESS'
+})
+
+const editNoteFail = (error) => ({
+     type: 'EDIT_NOTE_FAIL',
+     error
+ })

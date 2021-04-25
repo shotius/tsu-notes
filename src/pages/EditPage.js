@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import axios from "axios";
 import {useHistory, useParams} from "react-router-dom";
 
-const EditNote = ({notes, setNotes}) => {
+const EditNote = ({notes, handleEditNote}) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const history = useHistory()
@@ -12,16 +12,8 @@ const EditNote = ({notes, setNotes}) => {
   const handleClick = (e) => {
     e.preventDefault()
     if (title || body) {
-      axios
-        .put(`http://localhost:3001/notes/${note.id}`, {...note, title, body})
-        .then(response => {
-          const newNotes = notes.map(note => note.id === response.data.id ? response.data : note)
-          setNotes(newNotes)
-          history.goBack()
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      const newNote = {...note, body, title}
+      handleEditNote(newNote, () => history.goBack())
     }
   }
 

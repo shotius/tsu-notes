@@ -6,37 +6,17 @@ import {MainPage} from './pages/MainPage'
 import {NotesPage} from './pages/NotesPage'
 import {NotePage} from './pages/NotePage'
 import './App.css'
-import axios from 'axios'
 import EditPage from "./pages/EditPage";
-import { getNotes, deleteNote } from './redux/actions/notesAction'
+import { getNotes, deleteNote, addNote, editNote } from './redux/actions/notesAction'
 import { useSelector, useDispatch } from 'react-redux'
-import notesReducer from './redux/reducers/notesReducer'
 
 export default function App() {
-  const [notes, setNotes] = useState([])
-
   const dispatch = useDispatch()
-  const notesRed = useSelector((state) => state.notesReducer.notes)
+  const notes = useSelector((state) => state.notesReducer.notes)
 
   useEffect(() => {
     dispatch(getNotes())
   }, [])
-
-  // after deleletion fetch notes again
-  const handleDeleteNote = (id) => {
-    dispatch(deleteNote(id))
-  }
-
-  const editNote = (id) => {
-    console.log('edit is clicked')
-  }
-
-  const addNote = (note) => {
-    axios
-      .post('http://localhost:3001/notes', note)
-      .then(({data}) => setNotes(notes.concat(data)))
-      .catch(err => console.log(err))
-  }
 
   return (
     <div className='App'>
@@ -45,18 +25,21 @@ export default function App() {
         <Header/>
         <div className='content'>
           <Switch>
-            <Route path="/note/:id/edit" render={({match: {params}}) => <EditPage notes={notes} setNotes={setNotes}/>
-            }/>
+            <Route path="/note/:id/edit" >
+              <EditPage 
+                notes={notes}
+                handleEditNote={(note, callback) => dispatch(editNote(note, callback))}/>
+            </Route>
             <Route
               path='/note/:id'
               render={(props) => <NotePage id={props.match.params.id}/>}
             />
             <Route path='/notes'>
               <NotesPage
-                notes={notesRed}
-                removeNote={handleDeleteNote}
+                notes={notes}
+                removeNote={(id) => dispatch(deleteNote(id))}
                 editNote={editNote}
-                addNote={addNote}
+                addNote={(note) => dispatch(addNote(note))}
               />
 
             </Route>
