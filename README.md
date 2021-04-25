@@ -1,4 +1,8 @@
-### to install: clone repository
-### npm install 
-### in one terminal run: npm run server
-### in another terminal run : npm start
+### to install: 
+clone repository
+### run commands in first terminal:
+npm install </br>
+npm run server
+
+### in another the second terminal run : 
+npm start
