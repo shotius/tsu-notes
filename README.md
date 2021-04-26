@@ -4,5 +4,5 @@ clone repository
 npm install </br>
 npm run server
 
-### in the second terminal run : 
+### open the second terminal and run : 
 npm start
