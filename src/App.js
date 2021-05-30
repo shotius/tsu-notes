@@ -9,6 +9,7 @@ import './App.css'
 import EditPage from "./pages/EditPage";
 import { getNotes, deleteNote, addNote, editNote } from './redux/actions/notesAction'
 import { useSelector, useDispatch } from 'react-redux'
+import FileUpload from './components/FileUpload'
 
 export default function App() {
   const dispatch = useDispatch()
@@ -44,6 +45,9 @@ export default function App() {
             </Route>
             <Route path='/about'>
               <h1>About Page</h1>
+            </Route>
+            <Route path='/upload'>
+              <FileUpload />  
             </Route>
             <Route path='/'>
               <MainPage/>

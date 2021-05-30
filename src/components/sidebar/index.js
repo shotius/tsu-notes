@@ -16,6 +16,9 @@ export function Sidebar() {
           <li>
             <Link to='/about'>About</Link>
           </li>
+          <li>
+            <Link to='/upload'>File Upload</Link>
+          </li>
         </ul>
       </nav>
     </div>
